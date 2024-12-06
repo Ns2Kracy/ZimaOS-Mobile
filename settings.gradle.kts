@@ -30,4 +30,6 @@ dependencyResolutionManagement {
 
 include(":app:android")
 
+include(":app:ios")
+
 include(":app:shared")

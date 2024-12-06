@@ -5,7 +5,9 @@
 xcuserdata
 !src/**/build/
 local.properties
+.fleet
 .idea
+.vscode
 .DS_Store
 captures
 .externalNativeBuild
