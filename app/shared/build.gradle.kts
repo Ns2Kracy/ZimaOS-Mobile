@@ -4,6 +4,10 @@ import org.jetbrains.kotlin.gradle.dsl.JvmTarget
 plugins {
     alias(libs.plugins.kotlinMultiplatform)
     alias(libs.plugins.androidLibrary)
+
+    id("org.openapi.generator") version "7.10.0"
+    id("org.jetbrains.kotlin.plugin.serialization") version "2.1.0"
+    id("com.rickclephas.kmp.nativecoroutines") version "1.0.0-ALPHA-38"
 }
 
 kotlin {
@@ -27,13 +31,33 @@ kotlin {
     
     sourceSets {
         commonMain.dependencies {
-            // put your Multiplatform dependencies here
+            // coroutines
+            implementation(libs.kotlinx.coroutines.core)
+
+            // ktor
+            implementation(libs.ktor.client.core)
+            implementation(libs.ktor.client.content.negotiation)
+            implementation(libs.ktor.serialization.kotlinx.json)
+
+            // koin
+            implementation(libs.koin.core)
+
+            // serialization
+            implementation(libs.kotlinx.serialization.json)
+        }
+        androidMain.dependencies {
+            // ktor client
+            implementation(libs.ktor.client.android)
+        }
+        iosMain.dependencies {
+            // ktor client
+            implementation(libs.ktor.client.darwin)
         }
     }
 }
 
 android {
-    namespace = "org.icewhale.zimaos.shared"
+    namespace = "com.zimaspace.zimaos.shared"
     compileSdk = libs.versions.android.compileSdk.get().toInt()
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_11
