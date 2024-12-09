@@ -7,9 +7,3 @@ class Greeting {
         return "Hello, ${platform.name}!"
     }
 }
-
-class Hello {
-    fun world(): String {
-        return  "Hello, World!"
-    }
-}

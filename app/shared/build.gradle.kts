@@ -8,6 +8,7 @@ plugins {
     id("org.openapi.generator") version "7.10.0"
     id("org.jetbrains.kotlin.plugin.serialization") version "2.1.0"
     id("com.rickclephas.kmp.nativecoroutines") version "1.0.0-ALPHA-38"
+    id("com.google.devtools.ksp") version "2.1.0-1.0.29"
 }
 
 kotlin {
@@ -30,20 +31,29 @@ kotlin {
     }
     
     sourceSets {
+        all {
+            languageSettings.optIn("kotlin.experimental.ExperimentalObjCName")
+        }
         commonMain.dependencies {
-            // coroutines
+            // Asynchronous
             implementation(libs.kotlinx.coroutines.core)
 
-            // ktor
+            // Http
             implementation(libs.ktor.client.core)
             implementation(libs.ktor.client.content.negotiation)
             implementation(libs.ktor.serialization.kotlinx.json)
 
-            // koin
+            // DI
             implementation(libs.koin.core)
 
-            // serialization
+            // Serializer
             implementation(libs.kotlinx.serialization.json)
+
+            // File
+            implementation(libs.okio)
+
+            // Date, Time
+            implementation(libs.kotlinx.datetime)
         }
         androidMain.dependencies {
             // ktor client
