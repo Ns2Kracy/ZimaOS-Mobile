@@ -81,47 +81,47 @@ android {
 
 val openapiSpecs = mapOf(
     // ZimaOS-Main API
-    "zimaos-openapi" to "api/zimaos/zimaos/openapi.yaml",
-    "zimaosV1-openapi" to "api/zimaos/zimaos/openapi_v1.yaml",
+    "zimaosOpenapi" to "api/zimaos/zimaos/openapi.yaml",
+    "zimaosV1Openapi" to "api/zimaos/zimaos/openapi_v1.yaml",
 
     // ZimaOS-Local-Storage API
-    "localstorage-openapi" to "api/zimaos-local-storage/local_storage/openapi.yaml",
-    "localstorageV1-openapi" to "api/zimaos-local-storage/local_storage/openapi_v1.yaml",
+    "localstorageOpenapi" to "api/zimaos-local-storage/local_storage/openapi.yaml",
+    "localstorageV1Openapi" to "api/zimaos-local-storage/local_storage/openapi_v1.yaml",
 
     // ZimaOS-App-Management API
-    "appmanagement-openapi" to "api/zimaos-app-management/app_management/openapi.yaml",
-    "appmanagementV1-openapi" to "api/zimaos-app-management/app_management/openapi_v1.yaml",
+    "appmanagementOpenapi" to "api/zimaos-app-management/app_management/openapi.yaml",
+    "appmanagementV1Openapi" to "api/zimaos-app-management/app_management/openapi_v1.yaml",
 
     // ZimaOS-Virt-Management API
-    "virtmanagement-openapi" to "api/zimaos-virt-management/virt_management/openapi.yaml",
+    "virtmanagementOpenapi" to "api/zimaos-virt-management/virt_management/openapi.yaml",
 
     // ZimaOS-Mod-Management API
-    "modmanagement-openapi" to "api/zimaos-mod-management/mod_management/openapi.yaml",
+    "modmanagementOpenapi" to "api/zimaos-mod-management/mod_management/openapi.yaml",
 
     // ZimaOS-User-Service API
-    "user-openapi" to "api/zimaos-user-service/users/openapi.yaml",
-    "userV1-openapi" to "/api/zimaos-user-service/users/openapi_v1.yaml",
+    "userOpenapi" to "api/zimaos-user-service/users/openapi.yaml",
+    "userV1Openapi" to "/api/zimaos-user-service/users/openapi_v1.yaml",
 
     // ZimaOS-AI API
-    "ai-openapi" to "api/zimaos-ai/ai/openapi.yaml",
+    "aiOpenapi" to "api/zimaos-ai/ai/openapi.yaml",
 
     // ZimaOS-Search API
-    "search-openapi" to "api/zimaos-search/openapi.yaml",
+    "searchOpenapi" to "api/zimaos-search/openapi.yaml",
 
     // IceWhale-Drive API
-    "drive-openapi" to "api/icewhale-drive/openapi.yaml",
+    "driveOpenapi" to "api/icewhale-drive/openapi.yaml",
 
     // IceWhale-Files API
-    "files-openapi" to "api/icewhale-files/openapi.yaml",
+    "filesOpenapi" to "api/icewhale-files/openapi.yaml",
 
     // IceWhale-Files-Backup API
-    "files-backup-openapi" to "api/icewhale-files-backup/openapi.yaml",
+    "filesbackupOpenapi" to "api/icewhale-files-backup/openapi.yaml",
 
     // CasaOS-Installer API
-    "casaos-installer-openapi" to "api/casaos-installer/installer/openapi.yaml",
+    "installerOpenapi" to "api/casaos-installer/installer/openapi.yaml",
 
     // CasaOS-Message-Bus API
-    "casaos-message-bus-openapi" to "api/casaos-message-bus/message_bus/openapi.yaml",
+    "messagebusOpenapi" to "api/casaos-message-bus/message_bus/openapi.yaml",
 )
 
 openapiSpecs.forEach {
@@ -135,7 +135,6 @@ openapiSpecs.forEach {
 
         configOptions.set(mapOf(
             "library" to "multiplatform",
-            "serializationLibrary" to "kotlinx_serialization",
             "dateLibrary" to "kotlinx-datetime",
         ))
     }
