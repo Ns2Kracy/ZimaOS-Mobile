@@ -30,3 +30,4 @@ dependencyResolutionManagement {
 
 include(":app:android")
 include(":app:shared")
+include(":generated:openapi")

@@ -63,6 +63,11 @@ kotlin {
             // ktor client
             implementation(libs.ktor.client.darwin)
         }
+        val commonMain by getting {
+            dependencies {
+                implementation(project(":generated:openapi"))
+            }
+        }
     }
 }
 
@@ -133,14 +138,40 @@ openapiSpecs.forEach {
         apiPackage.set("com.zimaspace.zimaos.openapi")
         modelPackage.set("com.zimaspace.zimaos.model.${it.key}")
 
-        configOptions.set(mapOf(
-            "library" to "multiplatform",
-            "dateLibrary" to "kotlinx-datetime",
-        ))
+        // 添加更多配置选项
+        configOptions.set(
+            mapOf(
+                "library" to "multiplatform",  // 使用 Kotlin Multiplatform
+                "dateLibrary" to "kotlinx-datetime",  // 使用 kotlinx-datetime 处理日期
+                "collectionType" to "list",  // 使用 List 而不是 Array
+                "useCoroutines" to "true",  // 使用协程
+                "packageName" to "com.zimaspace.zimaos",  // 基础包名
+            )
+        )
     }
 }
-tasks.register("openApiGenerateAll") { dependsOn(openapiSpecs.keys.map { "openApiGenerate-$it" }) }
 
-tasks.withType<KotlinCompile>(){
+// 清理任务
+tasks.register("cleanOpenApiGenerated", Delete::class) {
+    delete("$rootDir/generated/openapi")
+}
+
+// 在生成之前先清理
+tasks.register("openApiGenerateAll") {
+    dependsOn("cleanOpenApiGenerated")
+    dependsOn(openapiSpecs.keys.map { "openApiGenerate-$it" })
+}
+
+// 确保在编译之前生成代码
+tasks.withType<KotlinCompile>() {
     dependsOn("openApiGenerateAll")
+}
+
+// 添加生成的源码目录
+kotlin {
+    sourceSets {
+        val commonMain by getting {
+            kotlin.srcDir("$rootDir/generated/openapi/src/main/kotlin")
+        }
+    }
 }

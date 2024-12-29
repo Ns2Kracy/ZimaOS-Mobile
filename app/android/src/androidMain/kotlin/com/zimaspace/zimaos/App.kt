@@ -26,7 +26,8 @@ fun App() {
     val context = LocalContext.current
     val scope = rememberCoroutineScope()
     val preferencesRepository = remember { AndroidPreferencesRepository(context) }
-    
+
+
     MaterialTheme {
         Column(
             modifier = Modifier
@@ -40,7 +41,7 @@ fun App() {
                 style = MaterialTheme.typography.h6,
                 modifier = Modifier.padding(bottom = 16.dp)
             )
-            
+
             Row(
                 modifier = Modifier
                     .fillMaxWidth()
@@ -64,24 +65,24 @@ fun App() {
                     modifier = Modifier.clickable { selectedInputType = InputType.IP_ADDRESS }
                 )
             }
-            
+
             OutlinedTextField(
                 value = zerotierInput,
                 onValueChange = { zerotierInput = it },
                 label = { Text(if (selectedInputType == InputType.ZEROTIER_ID) "Zerotier ID" else "IP Address") },
-                placeholder = { 
+                placeholder = {
                     Text(
-                        if (selectedInputType == InputType.ZEROTIER_ID) 
-                            "Enter 16-digit Zerotier ID" 
-                        else 
+                        if (selectedInputType == InputType.ZEROTIER_ID)
+                            "Enter 16-digit Zerotier ID"
+                        else
                             "Enter IP Address"
-                    ) 
+                    )
                 },
                 modifier = Modifier.fillMaxWidth()
             )
-            
+
             Spacer(modifier = Modifier.height(16.dp))
-            
+
             Button(
                 onClick = {
                     scope.launch {
@@ -90,7 +91,7 @@ fun App() {
                             InputType.ZEROTIER_ID -> ConnectionConfig.isValidZerotierID(zerotierInput)
                             InputType.IP_ADDRESS -> ConnectionConfig.isValidIPAddress(zerotierInput)
                         }
-                        
+
                         if (isValid) {
                             if (preferencesRepository.pingAddress(zerotierInput)) {
                                 val baseUrl = "http://$zerotierInput"
@@ -101,9 +102,9 @@ fun App() {
                                 showToast(context, "Could not connect to the address")
                             }
                         } else {
-                            val errorMessage = if (selectedInputType == InputType.ZEROTIER_ID) 
-                                "Invalid Zerotier ID. Please enter a 16-digit hexadecimal number" 
-                            else 
+                            val errorMessage = if (selectedInputType == InputType.ZEROTIER_ID)
+                                "Invalid Zerotier ID. Please enter a 16-digit hexadecimal number"
+                            else
                                 "Invalid IP address format"
                             showToast(context, errorMessage)
                         }
